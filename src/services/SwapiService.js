@@ -1,6 +1,68 @@
 export default class SwapiService {
   _apiBase = 'https://swapi.dev/api';
 
+  _extractId(item) {
+    const idRegExp = /\/([0-9]*)\/$/;
+    const id = item.url.match(idRegExp)[1];
+
+    return id;
+  }
+
+  _transformPerson(person) {
+    const { name, gender, birthYear, eyeColor } = person;
+
+    return {
+      id: this._extractId(person),
+      name,
+      gender,
+      birthYear,
+      eyeColor,
+    };
+  }
+
+  _transformPlanet(planet) {
+    const {
+      id = this._extractId(planet),
+      name,
+      population,
+      rotation_period,
+      diameter,
+    } = planet;
+
+    return {
+      id,
+      name,
+      population,
+      rotationPeriod: rotation_period,
+      diameter,
+    };
+  }
+
+  _transformStarship(starship) {
+    const {
+      name,
+      model,
+      manufacturer,
+      cost_in_credits,
+      length,
+      crew,
+      passengers,
+      cargo_capacity,
+    } = starship;
+
+    return {
+      id: this._extractId(starship),
+      name,
+      model,
+      manufacturer,
+      costInCredits: cost_in_credits,
+      length,
+      crew,
+      passengers,
+      cargoCapacity: cargo_capacity,
+    };
+  }
+
   async getResource(url) {
     const res = await fetch(`${this._apiBase}${url}`);
 
@@ -11,33 +73,39 @@ export default class SwapiService {
     return await res.json();
   }
 
-  async getAllPeople() {
-    const res = await this.getResource('/people');
+  async getPerson(id) {
+    const person = await this.getResource(`/people/${id}`);
 
-    return res.results;
+    return this._transformPerson(person);
   }
 
-  getPerson(id) {
-    return this.getResource(`/people/${id}`);
+  async getAllPeople() {
+    const people = await this.getResource('/people');
+
+    return people.results.map(this._transformPerson);
+  }
+
+  async getPlanet(id) {
+    const planet = await this.getResource(`/planets/${id}`);
+
+    return this._transformPlanet(planet);
   }
 
   async getAllPlanets() {
-    const res = await this.getResource('/planets');
+    const planets = await this.getResource('/planets');
 
-    return res.results;
+    return planets.results.map(this._transformPlanet);
   }
 
-  getPlanet(id) {
-    return this.getResource(`/planets/${id}`);
+  async getStarship(id) {
+    const starship = await this.getResource(`/starships/${id}`);
+
+    return this._transformStarship(starship);
   }
 
   async getAllStarships() {
-    const res = await this.getResource('/starships');
+    const starships = await this.getResource('/starships');
 
-    return res.results;
-  }
-
-  getStarship(id) {
-    return this.getResource(`/starships/${id}`);
+    return starships.results.map(this._transformStarship);
   }
 }
