@@ -8,7 +8,7 @@ export default class SwapiService {
     return id;
   }
 
-  _transformPerson(person) {
+  _transformPerson = person => {
     const { name, gender, birthYear, eyeColor } = person;
 
     return {
@@ -18,9 +18,9 @@ export default class SwapiService {
       birthYear,
       eyeColor,
     };
-  }
+  };
 
-  _transformPlanet(planet) {
+  _transformPlanet = planet => {
     const {
       id = this._extractId(planet),
       name,
@@ -36,9 +36,9 @@ export default class SwapiService {
       rotationPeriod: rotation_period,
       diameter,
     };
-  }
+  };
 
-  _transformStarship(starship) {
+  _transformStarship = starship => {
     const {
       name,
       model,
@@ -61,7 +61,7 @@ export default class SwapiService {
       passengers,
       cargoCapacity: cargo_capacity,
     };
-  }
+  };
 
   async getResource(url) {
     const res = await fetch(`${this._apiBase}${url}`);
