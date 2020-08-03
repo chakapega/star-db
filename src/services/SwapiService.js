@@ -9,14 +9,14 @@ export default class SwapiService {
   }
 
   _transformPerson = person => {
-    const { name, gender, birthYear, eyeColor } = person;
+    const { name, gender, birth_year, eye_color } = person;
 
     return {
       id: this._extractId(person),
       name,
       gender,
-      birthYear,
-      eyeColor,
+      birthYear: birth_year,
+      eyeColor: eye_color,
     };
   };
 
