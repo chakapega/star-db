@@ -16,11 +16,12 @@ export default class PeoplePage extends Component {
 
   render() {
     const { selectedPerson } = this.state;
+    const { getData } = this.props;
 
     return (
       <div className="d-flex mb2">
         <div className="col-md-6">
-          <ItemList onItemSelected={this.onPersonSelected} />
+          <ItemList getData={getData} onItemSelected={this.onPersonSelected} />
         </div>
         <div className="col-md-6">
           <PersonDetails personId={selectedPerson} />
