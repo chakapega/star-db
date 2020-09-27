@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 import ItemList from '../itemList/ItemList';
-import PersonDetails from '../personDetails/PersonDetails';
+import ItemDetails from '../itemDetails/ItemDetails';
+import ErrorBoundry from '../errorBoundry/ErrorBoundry';
+import Row from '../row/Row';
 
 import './PeoplePage.css';
 
@@ -17,16 +19,17 @@ export default class PeoplePage extends Component {
   render() {
     const { selectedPerson } = this.state;
     const { getData } = this.props;
+    const itemList = (
+      <ItemList getData={getData} onItemSelected={this.onPersonSelected}>
+        {({ name, gender, birthYear }) => `${name} (${gender}, ${birthYear})`}
+      </ItemList>
+    );
+    const personDetails = <ItemDetails itemId={selectedPerson} />;
 
     return (
-      <div className="d-flex mb2">
-        <div className="col-md-6">
-          <ItemList getData={getData} onItemSelected={this.onPersonSelected} />
-        </div>
-        <div className="col-md-6">
-          <PersonDetails personId={selectedPerson} />
-        </div>
-      </div>
+      <ErrorBoundry>
+        <Row left={itemList} rigth={personDetails} />
+      </ErrorBoundry>
     );
   }
 }

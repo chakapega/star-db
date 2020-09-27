@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
+import ErrorBoundry from '../errorBoundry/ErrorBoundry';
 import Header from '../header/Header';
-import RandomPlanet from '../randomPlanet/RandomPlanet';
-import PeoplePage from '../peoplePage/PeoplePage';
+import Row from '../row/Row';
+import ItemDetails from '../itemDetails/ItemDetails';
+// import RandomPlanet from '../randomPlanet/RandomPlanet';
+// import PeoplePage from '../peoplePage/PeoplePage';
 import SwapiService from '../../services/SwapiService';
+import { Record } from '../itemDetails/ItemDetails';
 
 import './App.css';
 
@@ -11,12 +15,39 @@ class App extends Component {
   swapiService = new SwapiService();
 
   render() {
+    const {
+      getPerson,
+      getStarship,
+      getPersonImage,
+      getStarshipImage,
+    } = this.swapiService;
+    const personDetails = (
+      <ItemDetails getData={getPerson} getImageUrl={getPersonImage} itemId={11}>
+        <Record field="gender" label="Gender" />
+        <Record field="eyeColor" label="Eye color" />
+      </ItemDetails>
+    );
+    const starshipDetails = (
+      <ItemDetails
+        getData={getStarship}
+        getImageUrl={getStarshipImage}
+        itemId={5}
+      >
+        <Record field="model" label="Model" />
+        <Record field="length" label="Length" />
+        <Record field="costInCredits" label="Cost" />
+      </ItemDetails>
+    );
+
     return (
-      <div>
-        <Header />
-        <RandomPlanet />
-        <PeoplePage getData={this.swapiService.getAllPeople} />
-      </div>
+      <ErrorBoundry>
+        <div className="stardb-app">
+          <Header />
+          {/* <RandomPlanet /> */}
+          {/* <PeoplePage getData={this.swapiService.getAllPeople} /> */}
+          <Row left={personDetails} right={starshipDetails} />
+        </div>
+      </ErrorBoundry>
     );
   }
 }
