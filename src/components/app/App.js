@@ -23,12 +23,12 @@ class App extends Component {
   swapiService = new SwapiService();
 
   render() {
-    const {
-      getPerson,
-      getStarship,
-      getPersonImage,
-      getStarshipImage,
-    } = this.swapiService;
+    // const {
+    //   getPerson,
+    //   getStarship,
+    //   getPersonImage,
+    //   getStarshipImage,
+    // } = this.swapiService;
     // const personDetails = (
     //   <ItemDetails getData={getPerson} getImageUrl={getPersonImage} itemId={11}>
     //     <Record field="gender" label="Gender" />
@@ -57,9 +57,9 @@ class App extends Component {
           {/* <RandomPlanet /> */}
           {/* <PeoplePage getData={this.swapiService.getAllPeople} /> */}
           {/* <Row left={personDetails} right={starshipDetails} /> */}
-          <PersonList>{({ name }) => <span>{name}</span>}</PersonList>
-          <PlanetList>{({ name }) => <span>{name}</span>}</PlanetList>
-          <StarshipList>{({ name }) => <span>{name}</span>}</StarshipList>
+          <PersonList />
+          <PlanetList />
+          <StarshipList />
         </div>
       </ErrorBoundry>
     );
