@@ -16,6 +16,7 @@ import {
   PlanetDetails,
   StarshipDetails,
 } from '../swComponents/ItemsDetails';
+import { SwapiServiceProvider } from '../swapiServiceContext/SwapiServiceContext';
 
 import './App.css';
 
@@ -49,18 +50,20 @@ class App extends Component {
 
     return (
       <ErrorBoundry>
-        <div className="stardb-app">
-          <Header />
-          <PersonDetails itemId={11} />
-          <PlanetDetails itemId={5} />
-          <StarshipDetails itemId={9} />
-          {/* <RandomPlanet /> */}
-          {/* <PeoplePage getData={this.swapiService.getAllPeople} /> */}
-          {/* <Row left={personDetails} right={starshipDetails} /> */}
-          <PersonList />
-          <PlanetList />
-          <StarshipList />
-        </div>
+        <SwapiServiceProvider value={this.swapiService}>
+          <div className="stardb-app">
+            <Header />
+            <PersonDetails itemId={11} />
+            <PlanetDetails itemId={5} />
+            <StarshipDetails itemId={9} />
+            {/* <RandomPlanet /> */}
+            {/* <PeoplePage getData={this.swapiService.getAllPeople} /> */}
+            {/* <Row left={personDetails} right={starshipDetails} /> */}
+            <PersonList />
+            <PlanetList />
+            <StarshipList />
+          </div>
+        </SwapiServiceProvider>
       </ErrorBoundry>
     );
   }
