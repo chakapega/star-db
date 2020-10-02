@@ -2,20 +2,15 @@ import React, { Component } from 'react';
 
 import ErrorBoundry from '../errorBoundry/ErrorBoundry';
 import Header from '../header/Header';
-// import Row from '../row/Row';
-// import ItemDetails from '../itemDetails/ItemDetails';
 import SwapiService from '../../services/SwapiService';
-// import { Record } from '../itemDetails/ItemDetails';
 import {
   PersonList,
   PlanetList,
   StarshipList,
 } from '../swComponents/ItemsLists';
-import {
-  PersonDetails,
-  PlanetDetails,
-  StarshipDetails,
-} from '../swComponents/ItemsDetails';
+import PersonDetails from '../swComponents/PersonDetails';
+import PlanetDetails from '../swComponents/PlanetDetails';
+import StarshipDetails from '../swComponents/StarshipDetails';
 import { SwapiServiceProvider } from '../swapiServiceContext/SwapiServiceContext';
 
 import './App.css';
@@ -24,30 +19,6 @@ class App extends Component {
   swapiService = new SwapiService();
 
   render() {
-    // const {
-    //   getPerson,
-    //   getStarship,
-    //   getPersonImage,
-    //   getStarshipImage,
-    // } = this.swapiService;
-    // const personDetails = (
-    //   <ItemDetails getData={getPerson} getImageUrl={getPersonImage} itemId={11}>
-    //     <Record field="gender" label="Gender" />
-    //     <Record field="eyeColor" label="Eye color" />
-    //   </ItemDetails>
-    // );
-    // const starshipDetails = (
-    //   <ItemDetails
-    //     getData={getStarship}
-    //     getImageUrl={getStarshipImage}
-    //     itemId={5}
-    //   >
-    //     <Record field="model" label="Model" />
-    //     <Record field="length" label="Length" />
-    //     <Record field="costInCredits" label="Cost" />
-    //   </ItemDetails>
-    // );
-
     return (
       <ErrorBoundry>
         <SwapiServiceProvider value={this.swapiService}>
@@ -56,9 +27,6 @@ class App extends Component {
             <PersonDetails itemId={11} />
             <PlanetDetails itemId={5} />
             <StarshipDetails itemId={9} />
-            {/* <RandomPlanet /> */}
-            {/* <PeoplePage getData={this.swapiService.getAllPeople} /> */}
-            {/* <Row left={personDetails} right={starshipDetails} /> */}
             <PersonList />
             <PlanetList />
             <StarshipList />
