@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 
-import ErrorBoundry from '../errorBoundry/ErrorBoundry';
-import Header from '../header/Header';
 import SwapiService from '../../services/SwapiService';
-import {
-  PersonList,
-  PlanetList,
-  StarshipList,
-} from '../swComponents/ItemsLists';
-import PersonDetails from '../swComponents/PersonDetails';
-import PlanetDetails from '../swComponents/PlanetDetails';
-import StarshipDetails from '../swComponents/StarshipDetails';
+import ErrorBoundry from '../errorBoundry/ErrorBoundry';
 import { SwapiServiceProvider } from '../swapiServiceContext/SwapiServiceContext';
+import Header from '../header/Header';
+import RandomPlanet from '../randomPlanet/RandomPlanet';
+import PeoplePage from '../pages/PeoplePage';
+import PlanetPage from '../pages/PlanetPage';
+import StarshipPage from '../pages/StarshipPage';
 
 import './App.css';
 
@@ -24,12 +20,10 @@ class App extends Component {
         <SwapiServiceProvider value={this.swapiService}>
           <div className="stardb-app">
             <Header />
-            <PersonDetails itemId={11} />
-            <PlanetDetails itemId={5} />
-            <StarshipDetails itemId={9} />
-            <PersonList />
-            <PlanetList />
-            <StarshipList />
+            <RandomPlanet />
+            <PeoplePage />
+            <PlanetPage />
+            <StarshipPage />
           </div>
         </SwapiServiceProvider>
       </ErrorBoundry>

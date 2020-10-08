@@ -62,6 +62,7 @@ const PlanetView = ({ planet }) => {
       <img
         className="planet-image"
         src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+        alt={planet}
       />
       <div>
         <h4>{name}</h4>
