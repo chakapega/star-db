@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Row from '../row/Row';
-import { PersonList } from '../swComponents/ItemsLists';
+import { PersonList } from '../swComponents/ItemLists';
 import PersonDetails from '../swComponents/PersonDetails';
 
 export default class PeoplePage extends Component {
